@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flower Shop">
+    <title>Blossoms & Botique</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background-color: #ff758c;
+            padding: 15px 0;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            color: white;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation */
+        .nav {
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            display: inline-block;
+            padding: 15px 25px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #ff758c;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 40px 0;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #ff758c;
+        }
+
+        /* Home Banner */
+        .banner {
+            background-color: #ffdee9;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .banner h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff758c;
+        }
+
+        .banner p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff758c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e6677c;
+            transform: translateY(-2px);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: #ff758c;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background-color: #ff758c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #e6677c;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #ff758c;
+        }
+
+        .footer-col p {
+            margin-bottom: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            margin-right: 10px;
+            font-size: 20px;
+            color: #ff758c;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #ff758c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 20px;
+        }
+
+        .social-link:hover {
+            background-color: white;
+            color: #ff758c;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+
+        /* Cart Popup */
+        .cart-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            display: none;
+        }
+
+        .cart-popup.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        .popup-icon {
+            font-size: 40px;
+            color: #ff758c;
+            margin-bottom: 15px;
+        }
+
+        .popup-message {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .popup-close {
+            background-color: #ff758c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .popup-close:hover {
+            background-color: #e6677c;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Blossoms & Bouquet</div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#home" class="nav-link active" data-section="home">Home</a>
+            <a href="#flowers" class="nav-link" data-section="flowers">Flowers</a>
+            <a href="#footer" class="nav-link" data-section="contact">Contact</a>
+			
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="container">
+            <div class="banner">
+                <h2>Beautiful Flowers for Every Occasion</h2>
+                <p>Handcrafted bouquets and floral arrangements delivered with love and care.</p>
+                <a href="#flowers" class="btn" onclick="showSection('flowers')">Shop Now</a>
+            </div>
+            
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    
+                    <div class="product-info">
+                        <h3 class="product-title">Fresh Flowers</h3>
+                        <p>We source the freshest blooms daily from local farms.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    
+                    <div class="product-info">
+                        <h3 class="product-title">Custom Arrangements</h3>
+                        <p>Personalized bouquets designed for your special occasion.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    
+                    <div class="product-info">
+                        <h3 class="product-title">Fast Delivery</h3>
+                        <p>Same-day delivery available for orders placed before 2 PM.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flowers Section -->
+    <section id="flowers" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Beautiful Bouquets</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="rose.jpg" alt="Rose Bouquet" class="product-img">
+
+                    <div class="product-info">
+                        <h3 class="product-title">Rose Bouquet</h3>
+                        <p class="product-price">₹299</p>
+                        <button class="add-to-cart" onclick="addToCart('Rose Bouquet')">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="Lily Bouquet.jpg" alt="Rose Bouquet" class="product-img">
+
+                    <div class="product-info">
+                        <h3 class="product-title">Lily Bouquet</h3>
+                        <p class="product-price">₹249</p>
+                        <button class="add-to-cart" onclick="addToCart('Lily Bouquet')">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="Tulip Bouquet.jpg" alt="Rose Bouquet" class="product-img">
+
+                    <div class="product-info">
+                        <h3 class="product-title">Tulip Bouquet</h3>
+                        <p class="product-price">₹349</p>
+                        <button class="add-to-cart" onclick="addToCart('Tulip Bouquet')">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="Orchid Bouquet.jpg" alt="Rose Bouquet" class="product-img">
+
+                    <div class="product-info">
+                        <h3 class="product-title">Orchid Bouquet</h3>
+                        <p class="product-price">₹499</p>
+                        <button class="add-to-cart" onclick="addToCart('Orchid Bouquet')">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="Mixed Bouquet.jpg" alt="Rose Bouquet" class="product-img">
+
+                    <div class="product-info">
+                        <h3 class="product-title">Mixed Bouquet</h3>
+                        <p class="product-price">₹399</p>
+                        <button class="add-to-cart" onclick="addToCart('Mixed Bouquet')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Popup -->
+    <div class="overlay" id="overlay"></div>
+    <div class="cart-popup" id="cart-popup">
+        <div class="popup-icon">🛒</div>
+        <div class="popup-message" id="popup-message"></div>
+        <button class="popup-close" onclick="closePopup()">Continue Shopping</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Bloom & Bouquet</h3>
+                <p>We are a passionate team of florists dedicated to creating beautiful floral arrangements since 2010.</p>
+                <p>Our mission is to bring joy and beauty through flowers for all special moments in life.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <p>123 Flower Street, Garden City, 575019</p>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <p>+91 9876543210</p>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <p>flower@bloombouquet.com</p>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Bloom & Bouquet. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const target = this.getAttribute('href');
+                    
+                    // If it's the contact link, scroll to footer
+                    if (target === '#footer') {
+                        e.preventDefault();
+                        document.querySelector(target).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active class
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    } 
+                    // Otherwise handle section navigation
+                    else if (target.startsWith('#')) {
+                        e.preventDefault();
+                        const sectionId = this.getAttribute('data-section');
+                        showSection(sectionId);
+                        
+                        // Update active class
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Show section function
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Add to cart functionality
+        function addToCart(productName) {
+            const popup = document.getElementById('cart-popup');
+            const overlay = document.getElementById('overlay');
+            const message = document.getElementById('popup-message');
+            
+            message.textContent = `${productName} added to cart!`;
+            popup.classList.add('show');
+            overlay.classList.add('show');
+        }
+        
+        // Close popup
+        function closePopup() {
+            const popup = document.getElementById('cart-popup');
+            const overlay = document.getElementById('overlay');
+            
+            popup.classList.remove('show');
+            overlay.classList.remove('show');
+        }
+    </script>
+</body>
+</html>
